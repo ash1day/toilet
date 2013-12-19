@@ -14,22 +14,26 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript">
       function initialize() {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-          'address': '福井県鯖江市'
-        },function(result, status){
-          if (status == google.maps.GeocoderStatus.OK){
-            var mapOptions = {
-              center : result[0].geometry.location,
-              zoom   : 13
-            };
+        // 位置情報データ取得
+        var sparqlQueryURI = 'http://lod.ac/sabae/sparql?query=SELECT+*%0A++WHERE+%7B%0A++++%3Furi+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23lat%3E+%3Flatitude+.%0A+++++%3Furi+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23long%3E+%3Flongitude+.+FILTER+regex(str(%3Furi)%2C+%22toilet%22)%0A++%7D&format=json';
+        d3.json(sparqlQueryURI, function(pointsJson){
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({
+            'address': '福井県鯖江市'
+          },function(result, status){
+            if (status == google.maps.GeocoderStatus.OK){
+              var mapOptions = {
+                center : result[0].geometry.location,
+                zoom   : 13
+              };
 
-            // Googleマップ初期化
-            var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+              // Googleマップ初期化
+              var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 
-          } else {
-            alert('error');
-          }
+            } else {
+              alert('error');
+            }
+          });
         });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
