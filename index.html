@@ -56,13 +56,12 @@
         var overlay = new google.maps.OverlayView();
 
         overlay.onAdd = function () {
-          var layer = d3.select(this.getPanes().overlayLayer).append("div").attr("class", "svg_container");
+          var layer = d3.select(this.getPanes().overlayLayer).append("div")
+                                                             .classed("svg_container", true);
           var svg = layer.append("svg");
-          var voronoiVertexContainer = svg.append("g").attr({
-            "class" : "voronoi_vertex_container",
-            "opacity" : "0.5"
-          });
-
+          var voronoiVertexContainer = svg.append("g")
+                                          .classed("voronoi_vertex_container", true)
+                                          .attr("opacity", "0.6");
 
           overlay.draw = function () {
             // 緯度・経度データをピクセル情報に変換
@@ -112,7 +111,6 @@
             // TODO: トイレだと分かるようなマークに
             // 母点描画
             var sitePointsAttributes = {
-              "class": "site_points",
               "cx" : function(d, i) { return sitePointsCoordinatesPx[i][0]; },
               "cy" : function(d, i) { return sitePointsCoordinatesPx[i][1]; },
               "r"  : 5,
@@ -122,14 +120,15 @@
             };
             svg.selectAll("circle.site_points")
               .data(sitePointsCoordinatesPx)
+              .classed("site_points", true)
               .attr(sitePointsAttributes)
               .enter()
               .append("svg:circle")
+              .classed("site_points", true)
               .attr(sitePointsAttributes);
 
             // ボロノイ点描画
             var voronoiPointsAttributes = {
-              "class": "voronoi_vertex",
               "cx":function(d, i) { return voronoiPoints[i].coordinatesPx[0]; },
               "cy":function(d, i) { return voronoiPoints[i].coordinatesPx[1]; },
               "r" :function(d, i) { return voronoiPoints[i].distancePx/2+"px"; },
@@ -137,9 +136,11 @@
             }
             voronoiVertexContainer.selectAll("circle.voronoi_vertex")
               .data(voronoiPoints)
+              .classed("voronoi_points", true)
               .attr(voronoiPointsAttributes)
               .enter()
               .append("svg:circle")
+              .classed("voronoi_points", true)
               .attr(voronoiPointsAttributes);
           };
         };
