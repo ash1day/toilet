@@ -6,7 +6,16 @@
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
+
+      #map_canvas { height: 100% }
+      .svg_container {
+          width : 100%;
+          height: 100%;
+      }
+      .svg_container svg {
+          width : 8000px;
+          height: 8000px;
+      }
     </style>
     <script type="text/javascript"
             src ="https://maps.googleapis.com/maps/api/js?sensor=false&language=ja">
@@ -29,24 +38,65 @@
             'address': '福井県鯖江市'
           },function(result, status){
             if (status == google.maps.GeocoderStatus.OK){
-              var mapOptions = {
-                center : result[0].geometry.location,
-                zoom   : 13
-              };
-
-              // Googleマップ初期化
-              var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
+              drawMap(result[0].geometry.location, sitePointsCoordinates);
             } else {
               alert('error');
             }
           });
         });
       }
+
+      function drawMap(location, sitePointsCoordinates) {
+        var mapOptions = {
+          center : location,
+          zoom   : 14
+        };
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+        var overlay = new google.maps.OverlayView();
+
+        overlay.onAdd = function () {
+          var layer = d3.select(this.getPanes().overlayLayer).append("div").attr("class", "svg_container");
+          var svg = layer.append("svg");
+
+          overlay.draw = function () {
+            // 緯度・経度データをピクセル情報に変換
+            var projection = this.getProjection();
+            var googleMapProjection = function (coordinates) {
+                var googleCoordinates = new google.maps.LatLng(coordinates[1], coordinates[0]);
+                var coordinatesPx = projection.fromLatLngToDivPixel(googleCoordinates);
+                return [coordinatesPx.x, coordinatesPx.y];
+            };
+            var sitePointsCoordinatesPx = [];
+            sitePointsCoordinates.forEach(function(coordinates) {
+              sitePointsCoordinatesPx.push(googleMapProjection(coordinates));
+            });
+
+            // TODO: トイレだと分かるようなマークに
+            // 母点描画
+            var sitePointsAttributes = {
+              "class": "site_points",
+              "cx" : function(d, i) { return sitePointsCoordinatesPx[i][0]; },
+              "cy" : function(d, i) { return sitePointsCoordinatesPx[i][1]; },
+              "r"  : 5,
+              "fill"   : "#ecf0f1",
+              "stroke" : "#2980b9",
+              "stroke-width" : 1.5
+            };
+            svg.selectAll("circle.site_points")
+              .data(sitePointsCoordinatesPx)
+              .attr(sitePointsAttributes)
+              .enter()
+              .append("svg:circle")
+              .attr(sitePointsAttributes);
+          };
+        };
+        overlay.setMap(map);
+      }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-    <div id="map-canvas"/>
+    <div id="map_canvas"/>
   </body>
 </html>
