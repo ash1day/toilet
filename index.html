@@ -17,6 +17,13 @@
         // 位置情報データ取得
         var sparqlQueryURI = 'http://lod.ac/sabae/sparql?query=SELECT+*%0A++WHERE+%7B%0A++++%3Furi+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23lat%3E+%3Flatitude+.%0A+++++%3Furi+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23long%3E+%3Flongitude+.+FILTER+regex(str(%3Furi)%2C+%22toilet%22)%0A++%7D&format=json';
         d3.json(sparqlQueryURI, function(pointsJson){
+
+          // 位置情報データから母点の座標情報に
+          var sitePointsCoordinates = [];
+          pointsJson.results.bindings.forEach(function(point){
+            sitePointsCoordinates.push([point.longitude.value, point.latitude.value]);
+          });
+
           var geocoder = new google.maps.Geocoder();
           geocoder.geocode({
             'address': '福井県鯖江市'
