@@ -9,12 +9,12 @@
 
       #map_canvas { height: 100% }
       .svg_container {
-          width : 100%;
-          height: 100%;
+        width : 100%;
+        height: 100%;
       }
       .svg_container svg {
-          width : 8000px;
-          height: 8000px;
+        width : 8000px;
+        height: 8000px;
       }
     </style>
     <script type="text/javascript"
@@ -71,6 +71,38 @@
             sitePointsCoordinates.forEach(function(coordinates) {
               sitePointsCoordinatesPx.push(googleMapProjection(coordinates));
             });
+
+            // 母点の座標(px)からボロノイ点の座標(px)と各ボロノイ点について最も近い母点との距離(px)を求める
+            var getDistance = function (point1, point2) {
+              xDiff = point1[0]-point2[0];
+              yDiff = point1[1]-point2[1];
+              return Math.sqrt(Math.pow(xDiff,2) + Math.pow(yDiff,2));
+            };
+            var polygons = d3.geom.voronoi(sitePointsCoordinatesPx);
+            var voronoiPoints = [];
+            for (var polyKey = 0; polyKey < polygons.length; polyKey++) {
+              polygons[polyKey].forEach(function(polygon){
+                var voronoiPoint = {
+                  coordinatesPx : [ polygon[0],
+                                    polygon[1] ],
+                  distancePx    : getDistance(polygon,sitePointsCoordinatesPx[polyKey])
+                };
+
+                // 同座標の点は、最も近い母点との距離を採用する
+                var isValid = true;
+                for(var vorKey = 0; vorKey < voronoiPoints.length; vorKey++){
+                  if(voronoiPoints[vorKey].coordinatesPx.toString() == voronoiPoint.coordinatesPx.toString()){
+                    if(voronoiPoints[vorKey].distance <= voronoiPoint.distance) {
+                      isValid = false;
+                    } else {
+                      voronoiPoints.splice(vorKey,1);
+                      break;
+                    }
+                  }
+                }
+                if(isValid) voronoiPoints.push(voronoiPoint);
+              });
+            }
 
             // TODO: トイレだと分かるようなマークに
             // 母点描画
