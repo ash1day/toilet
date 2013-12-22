@@ -121,6 +121,24 @@
               .enter()
               .append("svg:circle")
               .attr(sitePointsAttributes);
+
+            // ボロノイ点描画
+            var voronoiPointsAttributes = {
+              "class": "voronoi_vertex",
+              "cx":function(d, i) { return voronoiPoints[i].coordinatesPx[0]; },
+              "cy":function(d, i) { return voronoiPoints[i].coordinatesPx[1]; },
+              "r" :function(d, i) { return voronoiPoints[i].distancePx/2+"px"; },
+              "fill":"#e74c3c",
+              "stroke":"#c0392b",
+              "stroke-width" : 1.5,
+              opacity:"0.5"
+            }
+            svg.selectAll("circle.voronoi_vertex")
+              .data(voronoiPoints)
+              .attr(voronoiPointsAttributes)
+              .enter()
+              .append("svg:circle")
+              .attr(voronoiPointsAttributes);
           };
         };
         overlay.setMap(map);
