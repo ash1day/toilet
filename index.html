@@ -58,6 +58,11 @@
         overlay.onAdd = function () {
           var layer = d3.select(this.getPanes().overlayLayer).append("div").attr("class", "svg_container");
           var svg = layer.append("svg");
+          var voronoiVertexContainer = svg.append("g").attr({
+            "class" : "voronoi_vertex_container",
+            "opacity" : "0.5"
+          });
+
 
           overlay.draw = function () {
             // 緯度・経度データをピクセル情報に変換
@@ -128,12 +133,9 @@
               "cx":function(d, i) { return voronoiPoints[i].coordinatesPx[0]; },
               "cy":function(d, i) { return voronoiPoints[i].coordinatesPx[1]; },
               "r" :function(d, i) { return voronoiPoints[i].distancePx/2+"px"; },
-              "fill":"#e74c3c",
-              "stroke":"#c0392b",
-              "stroke-width" : 1.5,
-              opacity:"0.5"
+              "fill":"#e74c3c"
             }
-            svg.selectAll("circle.voronoi_vertex")
+            voronoiVertexContainer.selectAll("circle.voronoi_vertex")
               .data(voronoiPoints)
               .attr(voronoiPointsAttributes)
               .enter()
