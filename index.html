@@ -134,7 +134,7 @@
               "r" :function(d, i) { return voronoiPoints[i].distancePx/2+"px"; },
               "fill":"#e74c3c"
             }
-            voronoiVertexContainer.selectAll("circle.voronoi_vertex")
+            voronoiVertexContainer.selectAll("circle.voronoi_points")
               .data(voronoiPoints)
               .classed("voronoi_points", true)
               .attr(voronoiPointsAttributes)
