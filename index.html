@@ -37,23 +37,14 @@
             sitePointsCoordinates.push([point.longitude.value, point.latitude.value]);
           });
 
-          var geocoder = new google.maps.Geocoder();
-          geocoder.geocode({
-            'address': '福井県鯖江市'
-          },function(result, status){
-            if (status == google.maps.GeocoderStatus.OK){
-              drawMap(result[0].geometry.location, sitePointsCoordinates);
-            } else {
-              alert('error');
-            }
-          });
+          drawMap(sitePointsCoordinates);
         });
       }
 
-      function drawMap(location, sitePointsCoordinates) {
+      function drawMap(sitePointsCoordinates) {
         var mapOptions = {
-          center : location,
-          zoom   : 14
+          center : new google.maps.LatLng(35.964, 136.18447420000007),
+          zoom   : 14,
         };
 
         var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
@@ -108,7 +99,7 @@
                     }
                   }
                 }
-                if(isValid) voronoiPoints.push(voronoiPoint);
+                if(isValid) console.log(voronoiPoint.distancePx); voronoiPoints.push(voronoiPoint);
               });
             }
 
