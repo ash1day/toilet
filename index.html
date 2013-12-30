@@ -124,13 +124,13 @@
             }
 
             // 母点描画
-            var zoomLevel = map.getZoom();
+            var toiletMarkSize = map.getZoom()*4;
             var sitePointsAttributes = {
-              "x" : function(d, i) { return sitePointsCoordinatesPx[i][0]; },
-              "y" : function(d, i) { return sitePointsCoordinatesPx[i][1]; },
+              "x" : function(d, i) { return sitePointsCoordinatesPx[i][0]-toiletMarkSize/2; },
+              "y" : function(d, i) { return sitePointsCoordinatesPx[i][1]-toiletMarkSize/2; },
               "xlink:href"  : "toilet.svg",
-              "height" : zoomLevel*4+"px",
-              "width"  : zoomLevel*4+"px"
+              "height" : toiletMarkSize+"px",
+              "width"  : toiletMarkSize+"px"
             };
             svg.selectAll("image.site_points")
               .data(sitePointsCoordinatesPx)
