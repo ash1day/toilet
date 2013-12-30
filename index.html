@@ -123,6 +123,13 @@
               });
             }
 
+            // 母点との距離の平均を求める
+            var sumDistancePx = 0;
+            voronoiPoints.forEach(function(vp){
+              sumDistancePx += vp.distancePx;
+            });
+            var aveDistancePx = sumDistancePx/voronoiPoints.length;
+
             // 母点描画
             var toiletMarkSize = map.getZoom()*4;
             var sitePointsAttributes = {
@@ -145,7 +152,14 @@
             var voronoiPointsAttributes = {
               "cx":function(d, i) { return voronoiPoints[i].coordinatesPx[0]; },
               "cy":function(d, i) { return voronoiPoints[i].coordinatesPx[1]; },
-              "r" :function(d, i) { return voronoiPoints[i].distancePx/2+"px"; },
+              "r" :function(d, i) {
+                var radius = voronoiPoints[i].distancePx - aveDistancePx/2;
+                if(radius>0){
+                  return radius;
+                } else {
+                  return 0;
+                }
+              },
               "fill":"#e74c3c"
             }
             voronoiVertexContainer.selectAll("circle.voronoi_points")
