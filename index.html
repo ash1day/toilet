@@ -103,22 +103,21 @@
               });
             }
 
-            // TODO: トイレだと分かるようなマークに
             // 母点描画
+            var zoomLevel = map.getZoom();
             var sitePointsAttributes = {
-              "cx" : function(d, i) { return sitePointsCoordinatesPx[i][0]; },
-              "cy" : function(d, i) { return sitePointsCoordinatesPx[i][1]; },
-              "r"  : 5,
-              "fill"   : "#ecf0f1",
-              "stroke" : "#2980b9",
-              "stroke-width" : 1.5
+              "x" : function(d, i) { return sitePointsCoordinatesPx[i][0]; },
+              "y" : function(d, i) { return sitePointsCoordinatesPx[i][1]; },
+              "xlink:href"  : "toilet.svg",
+              "height" : zoomLevel*4+"px",
+              "width"  : zoomLevel*4+"px"
             };
-            svg.selectAll("circle.site_points")
+            svg.selectAll("image.site_points")
               .data(sitePointsCoordinatesPx)
               .classed("site_points", true)
               .attr(sitePointsAttributes)
               .enter()
-              .append("svg:circle")
+              .append("svg:image")
               .classed("site_points", true)
               .attr(sitePointsAttributes);
 

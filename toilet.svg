@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="612px" height="792px" viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
+<circle fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" stroke="#2C3E50" stroke-width="20" stroke-miterlimit="10" cx="292" cy="397.837" r="144.25"/>
+<path fill-rule="evenodd" clip-rule="evenodd" fill="#3498DB" d="M213.97,345.72c-8.05,0-14.57,6.52-14.57,14.57v53.86h58.29v-53.86
+	c0-8.05-6.52-14.57-14.58-14.57H213.97z"/>
+<path fill-rule="evenodd" clip-rule="evenodd" fill="#3498DB" d="M210.38,325.02c0-10.03,8.14-18.16,18.17-18.16
+	c10.03,0,18.16,8.13,18.16,18.16s-8.13,18.17-18.16,18.17C218.52,343.19,210.38,335.05,210.38,325.02z"/>
+<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#3498DB" points="210.38,417.53 246.71,417.53 242.48,490.181 
+	214.6,490.181 "/>
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#E74C3C" d="M345.09,345.72c-6.42,0-11.62,6.52-11.62,14.57v53.86h46.461
+		v-53.86c0-8.05-5.211-14.57-11.611-14.57H345.09z"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#E74C3C" d="M338.53,325.02c0-10.03,8.14-18.16,18.17-18.16
+		s18.16,8.13,18.16,18.16s-8.13,18.17-18.16,18.17S338.53,335.05,338.53,325.02z"/>
+	<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#E74C3C" points="343.61,417.53 369.8,417.53 366.75,490.181 
+		346.65,490.181 	"/>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#E74C3C" d="M310.24,414.569v0.421h92.909l0.021-0.421
+		c0-19.829-20.81-35.909-46.47-35.909C331.03,378.66,310.24,394.74,310.24,414.569z"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" fill="#2C3E50" d="M300,482.12c0,4.452-3.582,8.061-8,8.061l0,0
+	c-4.417,0-8-3.608-8-8.061V313.553c0-4.451,3.582-8.06,8-8.06l0,0c4.418,0,8,3.608,8,8.06V482.12z"/>
+</svg>
