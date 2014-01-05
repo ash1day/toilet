@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>トイレ危険地帯</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="toilet.css"/>
     <script type="text/javascript" src ="https://maps.googleapis.com/maps/api/js?sensor=false&language=ja"></script>
     <script src="bower_components/d3/d3.min.js" charset="utf-8"></script>
     <script src="toilet.js"></script>
   </head>
   <body>
-    <div id="map_canvas"/>
+    <div class="container">
+      <div class="row">
+        <h1>トイレ危険地帯</h1>
+        <p>鯖江市のトイレ情報データセットを利用して、トイレが無い場所の可視化を行いました。LODを使ってモノがある場所の可視化をすることは広まってきたので、本アプリではモノがないことを可視化することを目標に制作しました。データセットの差し替えによる逆マッシュアップによって、様々な場面で、市民の立場からの利便性向上や、行政やビジネスの立場からの意思決定材料に役立てられることを期待します。</p>
+        <div id="map_canvas"></div>
+        <p style="text-align: right;">制作: Yoshihiro ASHIDA and Yosuke ONOUE</p>
+      </div>
+    </div>
   </body>
 </html>
