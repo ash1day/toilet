@@ -1,5 +1,6 @@
 #map_canvas {
   height: 500px;
+  margin: 2em;
 }
 
 .svg_container {
@@ -14,4 +15,9 @@
   left  : -4000px;
   width : 8000px;
   height: 8000px;
+}
+
+#license {
+    margin: 2em;
+    text-align: center;
 }
