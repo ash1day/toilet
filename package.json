@@ -1,0 +1,14 @@
+{
+  "name": "toilet",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test",
+    "fetch-data": "node scripts/fetch-data.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "dependencies": {
+    "d3-delaunay": "6.0.4"
+  }
+}

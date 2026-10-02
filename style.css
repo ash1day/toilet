@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+#map {
+  height: 500px;
+}
+
+.credit {
+  margin: 4px 0;
+  text-align: right;
+  font-size: 0.875rem;
+}
+
+/* toilet.svg は縦長なので、正方形のアイコン枠に縦横比を保って収める */
+.toilet-icon {
+  object-fit: contain;
+}
+
+/* 円ごとではなくレイヤー全体に透明度をかけ、円が重なった部分が濃くならないようにする */
+.leaflet-danger-pane {
+  opacity: 0.6;
+}
